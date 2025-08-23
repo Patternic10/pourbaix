@@ -82,9 +82,17 @@ pip install pymatgen mp-api
 ---
 
 ## Configuration
-- **Materials Project API key**: The script reads `MP_API_KEY` from the source (or you can set an environment variable):
-  - In code: `MP_API_KEY = "..."`
-  - Or set in shell: `export MP_API_KEY=YOUR_KEY_HERE` (and load it in code with `os.environ["MP_API_KEY"]`).
+- **Materials Project API key**: The script will look for an environment variable `MP_API_KEY`. If it is not set, the script will **prompt you to enter it interactively** at runtime.
+
+To set the key permanently:
+- Linux/macOS:
+```bash
+export MP_API_KEY="your_key_here"
+```
+- Windows (PowerShell):
+```powershell
+setx MP_API_KEY "your_key_here"
+```
 - **Matplotlib backend**: If running headless, set `MPLBACKEND=Agg` or save figures without showing.
 - **Concentration**: default is `1e-6` M for all solution species present in the entries set; overridden via prompt.
 

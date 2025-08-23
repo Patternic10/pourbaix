@@ -3,7 +3,7 @@
 import copy
 import numpy as np
 import matplotlib.pyplot as plt
-
+import os
 from mp_api.client import MPRester
 from pymatgen.core import Composition, Element
 from pymatgen.analysis import pourbaix_diagram
@@ -19,7 +19,10 @@ from thermo_data import (
 elements = input("Enter elements (comma-separated): ").split(",")
 T = float(input("Enter temperature in K: "))
 conc = float(input("Enter concentration in mol/L (default = 1e-6): ") or "1e-6")
-MP_API_KEY = "jPRD4Dz76GJOi0oagYb7Vn9OOp6HC33v"  # or read from env
+# Get API key from environment or prompt user
+MP_API_KEY = os.getenv("MP_API_KEY")
+if not MP_API_KEY:
+    MP_API_KEY = input("Enter your Materials Project API key: ").strip()
 
 # ============================  CONSTANTS  ========================================================
 R = 8.314462618  # J/mol/K
