@@ -56,7 +56,7 @@ The goal is to produce Pourbaix stability fields that better reflect **non-ambie
 ## File Structure
 ```
 project/
-├── main.py                 # The main script (your provided code)
+├── pourbaixplot.py                 # The main script (your provided code)
 ├── thermo_data.py          # Thermochem registries & helper functions
 ├── environment.yml         # (optional) conda environment for reproducibility
 └── README.md               # This file
@@ -70,23 +70,14 @@ Use either **conda** or **venv + pip**. Conda is recommended for scientific stac
 ### Conda (recommended)
 ```bash
 conda env create -f environment.yml   # or create manually
-conda activate pourbaix-temp
+conda activate pourbaix
 ```
 If creating manually:
 ```bash
-conda create -n pourbaix-temp python=3.11 numpy matplotlib
-conda activate pourbaix-temp
+conda create -n pourbaix python=3.11 numpy matplotlib
+conda activate pourbaix
 pip install pymatgen mp-api
 ```
-
-### Python venv
-```bash
-python -m venv .venv
-source .venv/bin/activate   # Windows: .venv\Scripts\activate
-pip install numpy matplotlib pymatgen mp-api
-```
-
-> Ensure your environment has a working C compiler if any packages build native extensions.
 
 ---
 
@@ -137,7 +128,7 @@ The script is interactive:
 
 ### Example Run
 ```bash
-python main.py
+python pourbaixplot.py
 Enter elements (comma-separated): Si, O
 Enter temperature in K: 350
 Enter concentration in mol/L (default = 1e-6):
@@ -263,12 +254,13 @@ Include `environment.yml` (or `requirements.txt`) alongside the code when transf
 
 ## Limitations & Notes
 - The **quality of results depends on your `thermo_data.py`**. Provide accurate Cp(T), S(298), and ΔHf°(298) for solids and water; supply ion data where possible.
-- **Criss–Cobble** is a heuristic for oxy(anions); avoid using it for cations.
+- **Criss–Cobble** is a heuristic for oxy(anions) which can be extended to cations.
 - The script currently applies **uniform ion concentration**; element-specific activities can be extended by editing `conc_dict`.
 - Pymatgen’s Pourbaix diagrams assume ideal dilute solutions and standard electrochemical conventions; interpret high-T diagrams accordingly.
 
 ---
 
 ## License
-Add your preferred license (e.g., MIT) here if you plan to distribute the tool.
+This project is licensed under the MIT License – see the [LICENSE](LICENSE) file for details.
+
 
